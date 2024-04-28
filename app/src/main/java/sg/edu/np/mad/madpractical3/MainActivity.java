@@ -1,8 +1,11 @@
 package sg.edu.np.mad.madpractical3;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
+import java.util.Random;
 
 
 import androidx.activity.EdgeToEdge;
@@ -23,10 +26,31 @@ public class MainActivity extends AppCompatActivity {
         TextView tvName = findViewById(R.id.tvName);
         TextView tvDescription = findViewById(R.id.tvDescription);
         Button btnFollow = findViewById(R.id.btnFollow);
-
-        tvName.setText(user.name);
+        Random rand = new Random();
+        int randomNum = rand.nextInt(100);
+        tvName.setText(user.name + " " + randomNum);
         tvDescription.setText(user.description);
-        btnFollow.setText("Follow");
+        if (user.followed) {
+            btnFollow.setText("Unfollow");
+        } else {
+            btnFollow.setText("Follow");
+        }
+
+        btnFollow.setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View v){
+                if (user.followed) {
+                    user.followed = false;
+                    btnFollow.setText("Follow");
+                    Toast.makeText(MainActivity.this, "UnFollowed", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    user.followed = true;
+                    btnFollow.setText("Unfollow");
+                    Toast.makeText(MainActivity.this, "Followed", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
 
         EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
