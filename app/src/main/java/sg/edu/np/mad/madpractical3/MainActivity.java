@@ -1,5 +1,7 @@
 package sg.edu.np.mad.madpractical3;
 
+import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -49,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Followed", Toast.LENGTH_SHORT).show();
 
                 }
+            }
+        });
+        Button BtnMessage = findViewById(R.id.btnMessage);
+        BtnMessage.setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View v){
+                Intent activityname = new Intent(MainActivity.this,message.class);
+                startActivity(activityname);
             }
         });
 
